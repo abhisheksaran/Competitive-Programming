@@ -1,10 +1,11 @@
 #include<bits/stdc++.h>
-using namespce std;
+using namespace std;
 
 /*
 *@author saran
-*@name 
-*@type
+*@name- 
+*@type-
+*@date-
 */
 
 int main(){
