@@ -3,9 +3,9 @@ using namespace std;
 
 /*
 *@author saran
-*@name- 
-*@type-
-*@date-
+*@name-Optimal strategy game  
+*@type-DP
+*@date-23th July
 */
 
 //dp[i][j] is maximum scores can be obrained from pile i to pile j by first player(  0<=i,j<=n-1  )
