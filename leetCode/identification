@@ -1,0 +1,25 @@
+DBMS
+https://www.tutorialspoint.com/dbms/dbms_quick_guide.htm
+
+Two Pointers 
+(https://leetcode.com/problems/subarray-sum-equals-k/discuss/301242/General-summary-of-what-kind-of-problem-can-cannot-solved-by-Two-Pointers)
+Now let's generalize the characteristics of the problems that can be solved by two pinters. The summary is simple:
+If a wider scope of the sliding window is valid, the narrower scope of that wider scope is valid mush hold.
+If a narrower scope of the sliding window is invalid, the wider scope of that narrower scope is invalid mush hold.
+
+Stack
+Array is given
+brute force is o(n*n)
+and if the second loop is dependent on the index of first loop
+example: nearest greater to right, nearest greater to left, nearest lesser to right and nearest lesser to left etc.
+
+Heap
+Array is given, k is given 
+and largest or smallest keyword is there
+
+Sliding Window
+There would be sequential dependency.(substring, sunarray)
+and then there is max, min, contains kind of question on all such possible seqential subsections.
+for example- contagious subarray of size 3 with max sum
+
+
