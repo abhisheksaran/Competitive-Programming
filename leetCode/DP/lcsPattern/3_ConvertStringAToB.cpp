@@ -1,7 +1,7 @@
 /*
  * @author: saran
  * Input: string a, string b 
- * Output: 
+ * Output:minimum number of insertion of deletion to convert string a into b 
  */
 #include<bits/stdc++.h>
 using namespace std;
