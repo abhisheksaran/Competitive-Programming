@@ -1,0 +1,5 @@
+Given - A string or an array 
+Feeling of breaking string into parts
+>>(i,j) breaks into (i,k) and (k+1,j) where k varies from i to j.
+>>such (i,j) gives us temporary solution.
+>>  
