@@ -1,0 +1,19 @@
+ How many edges minimum you need to connect n vertices ?
+
+No of vertex, Minumm edges
+0 1
+1 2
+2 3
+.
+.
+.
+Induction 
+n-1 n-2
+then 
+n n-1
+
+
+
+
+
+
