@@ -113,6 +113,22 @@ inline void OPEN(string s)
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-
+  int t,i;
+  cin>>t;
+  REP(i,t){
+    int n,j,sum=0;
+    cin>>n;
+    vi a(n);
+    REP(j,n) cin>>a[j], sum += a[j];
+    if(sum%n != 0) cout<<-1<<"\n";
+    else{
+      int avg = sum/n; 
+      int cnt = 0;
+      REP(j,n){
+        if(a[j]>avg) cnt++;
+      }
+      cout<<cnt<<"\n";
+    }
+  }
 	return 0;
 }

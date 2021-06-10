@@ -113,6 +113,20 @@ inline void OPEN(string s)
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
+  int t,i;
+  cin>>t;
+  REP(i,t){
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    int j;
+    REP(j,n) cin>>a[j];
+    int mxIdx = max_element(a.begin(), a.end())-a.begin();
+    int mnIdx = min_element(a.begin(), a.end())-a.begin();
+    int x = min(mxIdx, mnIdx);
+    int y = max(mxIdx, mnIdx);
+    cout<<min(x+1+n-y, min(y+1, n-x))<<"\n";
 
+  }
 	return 0;
 }
