@@ -2,10 +2,10 @@
  * Git: https://github.com/abhisheksaran
  * LinkedIn: https://www.linkedin.com/in/abhishek-saran-2900b/
  */
-
+ 
 #include<bits/stdc++.h>
 using namespace std;
-
+ 
 typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
@@ -15,14 +15,14 @@ typedef vector<vi> vvi;
 typedef vector<pii> vii;
 typedef vector<LL> vl;
 typedef vector<vl> vvl;
-
+ 
 double EPS = 1e-9;
 int INF = 1000000005;
 long long INFF = 1000000000000000005LL;
 double PI = acos(-1);
 int dirx[8] = { -1, 0, 0, 1, -1, -1, 1, 1 };
 int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
-
+ 
 #ifdef TESTING
 #define DEBUG fprintf(stderr, "====TESTING====\n")
 #define VALUE(x) cerr << "The value of " << #x << " is " << x << endl
@@ -32,7 +32,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define VALUE(x)
 #define debug(...)
 #endif
-
+ 
 #define FOR(a, b, c) for (int(a) = (b); (a) < (c); ++(a))
 #define FORN(a, b, c) for (int(a) = (b); (a) <= (c); ++(a))
 #define FORD(a, b, c) for (int(a) = (b); (a) >= (c); --(a))
@@ -58,7 +58,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define REVERSEA(arr, sz) reverse(ALLA(arr, sz))
 #define PERMUTE next_permutation
 #define TC(t) while (t--)
-
+ 
 inline string IntToString(LL a)
 {
     char x[100];
@@ -66,7 +66,7 @@ inline string IntToString(LL a)
     string s = x;
     return s;
 }
-
+ 
 inline LL StringToInt(string a)
 {
     char x[100];
@@ -75,7 +75,7 @@ inline LL StringToInt(string a)
     sscanf(x, "%lld", &res);
     return res;
 }
-
+ 
 inline string GetString(void)
 {
     char x[1000005];
@@ -83,7 +83,7 @@ inline string GetString(void)
     string s = x;
     return s;
 }
-
+ 
 inline string uppercase(string s)
 {
     int n = SIZE(s);
@@ -92,7 +92,7 @@ inline string uppercase(string s)
         s[i] = s[i] - 'a' + 'A';
     return s;
 }
-
+ 
 inline string lowercase(string s)
 {
     int n = SIZE(s);
@@ -101,7 +101,7 @@ inline string lowercase(string s)
         s[i] = s[i] - 'A' + 'a';
     return s;
 }
-
+ 
 inline void OPEN(string s)
 {
 #ifndef TESTING
@@ -109,25 +109,27 @@ inline void OPEN(string s)
     freopen((s + ".out").c_str(), "w", stdout);
 #endif
 }
-
+ 
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  int t,i;
-  cin>>t;
-  REP(i,t){
-    int n,l,r,j;
-    cin>>n>>l>>r;
-    vi a(n);
-    REP(j,n) cin>>a[j];
-    SORT(a);
-    LL ans = 0;
-    REPN(j,n-1){
-      LL x = lower_bound(a.begin(),a.begin()+j,l-a[j])-a.begin();
-      LL y = upper_bound(a.begin(),a.begin()+j,r-a[j])-a.begin();
-      ans += y-x;
-    }    
-    cout<<ans<<"\n";
+  int n,i;
+  long long ans = 0;
+  cin>>n;
+  vi a(n);
+  REP(i,n){
+    cin>>a[i];
   }
+  SORT(a);
+  map<int,int> mp;
+ // mp[a[0]] = 1;
+  for(i=0;i<n;i++){
+    for(int j=0;j<32;j++){
+      ans += LL (mp[(1<<j)-a[i] ]);
+    }
+ 
+   mp[a[i]]++; 
+  }
+  cout<<ans<<endl;
 	return 0;
 }

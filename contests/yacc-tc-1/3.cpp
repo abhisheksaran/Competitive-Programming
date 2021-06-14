@@ -113,21 +113,42 @@ inline void OPEN(string s)
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  int t,i;
-  cin>>t;
-  REP(i,t){
-    int n,l,r,j;
-    cin>>n>>l>>r;
-    vi a(n);
-    REP(j,n) cin>>a[j];
-    SORT(a);
-    LL ans = 0;
-    REPN(j,n-1){
-      LL x = lower_bound(a.begin(),a.begin()+j,l-a[j])-a.begin();
-      LL y = upper_bound(a.begin(),a.begin()+j,r-a[j])-a.begin();
-      ans += y-x;
-    }    
-    cout<<ans<<"\n";
+  LL n,i;
+  cin>>n;
+  vi a(n);
+  REP(i,n) cin>>a[i];
+  SORT(a);
+  LL ans =n;
+  vector<bool> vis(n,false);
+  //this is important
+  //initial search area should be n/2 only 
+  //otherwise it would fail on this test 
+  //1 1 1 1 2 4 8 16
+  //
+  //Greedy approach
+  //at most we can have n/2 pairs 
+  //the most optimal approach would be to start pairing larger half with smaller half
+  //ie to find a *largest* unpaired box of size less than equal to half of larger box in smaller half part of the array
+  LL x=n/2;
+  for(LL i=n-1;i>0;i--){
+    if(vis[i]==false){
+      vis[i]=true;
+      
+      LL j = upper_bound(a.begin(),a.begin()+x,LL(a[i]/2))-a.begin();
+      LL k =j-1;
+      for( k=j-1;k>=0;k--){ 
+        if(vis[k]==false){
+          vis[k]=true;
+          x=k;
+          ans--;
+          //cout<<i<<" "<<k<<"\n";
+          break;
+        }
+      }
+//      if(k<0) break;
+    }
   }
+  cout<<ans<<endl;
+
 	return 0;
 }

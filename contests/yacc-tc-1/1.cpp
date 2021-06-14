@@ -112,22 +112,15 @@ inline void OPEN(string s)
 
 int main(){
   ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
+  cin.tie(NULL); 
   int t,i;
   cin>>t;
   REP(i,t){
-    int n,l,r,j;
-    cin>>n>>l>>r;
-    vi a(n);
-    REP(j,n) cin>>a[j];
-    SORT(a);
-    LL ans = 0;
-    REPN(j,n-1){
-      LL x = lower_bound(a.begin(),a.begin()+j,l-a[j])-a.begin();
-      LL y = upper_bound(a.begin(),a.begin()+j,r-a[j])-a.begin();
-      ans += y-x;
-    }    
-    cout<<ans<<"\n";
+    int n,j,a,b;
+    cin>>a>>b>>n;
+    if(n%3==0)cout<<a<<endl;
+    else if(n%3==1) cout<<b<<endl;
+    else cout<<(a xor b)<<endl;
   }
 	return 0;
 }

@@ -113,21 +113,29 @@ inline void OPEN(string s)
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  int t,i;
-  cin>>t;
-  REP(i,t){
-    int n,l,r,j;
-    cin>>n>>l>>r;
-    vi a(n);
-    REP(j,n) cin>>a[j];
-    SORT(a);
-    LL ans = 0;
-    REPN(j,n-1){
-      LL x = lower_bound(a.begin(),a.begin()+j,l-a[j])-a.begin();
-      LL y = upper_bound(a.begin(),a.begin()+j,r-a[j])-a.begin();
-      ans += y-x;
-    }    
-    cout<<ans<<"\n";
+  int n,h,l,r,i;
+  cin>>n>>h>>l>>r;
+  vi a(n);
+  REP(i,n) cin>>a[i];
+  vvi dp(n,vector<int>(h,-1));
+  //base condition
+  dp[0][a[0]]= 0;
+  dp[0][(a[0]-1+h)%h]= 0;
+
+  for(i=1;i<n;i++){
+    for(int j =0;j<h;j++){
+      if(dp[i-1][j]!=-1){
+        dp[i][(j+a[i]+h)%h] = max(dp[i][(j+a[i]+h)%h], dp[i-1][j] + (j>=l && j<=r));
+        dp[i][(j+a[i]-1+h)%h] = max(dp[i][(j+a[i]-1+h)%h], dp[i-1][j] + (j>=l && j<=r));
+      }
+    }
   }
+  int ans = 0;
+
+  REP(i,h){
+    if(i>=l && i<=r) dp[n-1][i]++;
+    ans = max(ans, dp[n-1][i]);
+  }
+  cout<<ans<<endl;
 	return 0;
 }
