@@ -111,24 +111,24 @@ inline void OPEN(string s)
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  LL n,i,k;
-  cin>>n>>k;
-  vector<pair<long long,long long>> a(n+1,{0,0});
-  REP(i,n) cin>>a[i+1].first>>a[i+1].second;
-
-  SORT(a);
-
-  for(i=1;i<=n;i++){
-      if(a[i].first-a[i-1].first>k){
-        break;
-      }
-      else{
-        k -= a[i].first-a[i-1].first;
-        k += a[i].second;
-      }
+  int i,k,n;
+  string s;
+  cin>>s;
+  cin>>k;
+  n = s.length();
+  vi cnt(n,0);
+  REP(i,n-1){
+    if(s[i] == s[i+1]) cnt[i+1] =1;
   }
-  cout<<a[i-1].first+k<<endl;
+  REP(i,n) if(i>0) cnt[i] += cnt[i-1];
+  REP(i,k){
+   int l,r;
+   cin>>l>>r;
+   cout<<cnt[r-1]-cnt[l-1]<<endl;
+  }
 	return 0;
 }
+
+

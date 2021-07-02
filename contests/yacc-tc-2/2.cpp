@@ -109,26 +109,29 @@ inline void OPEN(string s)
     freopen((s + ".out").c_str(), "w", stdout);
 #endif
 }
+long long gcd(LL a, LL b){
+  if(b==0) return a;
+  return gcd(b, a%b);
+}
+
+long long lcm(int a, int b){
+  return (a/gcd(a,b))*b;
+}
 
 int main(){
-	ios_base::sync_with_stdio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  LL n,i,k;
-  cin>>n>>k;
-  vector<pair<long long,long long>> a(n+1,{0,0});
-  REP(i,n) cin>>a[i+1].first>>a[i+1].second;
+  int k,l,m,n,d;
+  cin>>k>>l>>m>>n>>d;
+  int ans = 0;
+  int x = lcm(k,l);
+  ans += (d/k) + (d/l) - (d/lcm(k,l)) ;
+  int y = lcm(m,k);
+  int z = lcm(m,l);
+  int a = lcm(x,m);
+  ans += (d/m) - (d/lcm(m,k)) - (d/lcm(m,l)) + (d/lcm(x,m));
 
-  SORT(a);
-
-  for(i=1;i<=n;i++){
-      if(a[i].first-a[i-1].first>k){
-        break;
-      }
-      else{
-        k -= a[i].first-a[i-1].first;
-        k += a[i].second;
-      }
-  }
-  cout<<a[i-1].first+k<<endl;
+  ans += (d/n) - (d/lcm(n,k)) - (d/lcm(n,l)) + (d/lcm(x,n)) - (d/lcm(m,n)) + (d/lcm(n,y)) + (d/lcm(n,z)) - (d/lcm(a,n));
+  cout<<ans<<endl;
 	return 0;
 }

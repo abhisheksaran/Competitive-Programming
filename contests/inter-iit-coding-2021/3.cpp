@@ -111,24 +111,66 @@ inline void OPEN(string s)
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  LL n,i,k;
-  cin>>n>>k;
-  vector<pair<long long,long long>> a(n+1,{0,0});
-  REP(i,n) cin>>a[i+1].first>>a[i+1].second;
-
-  SORT(a);
-
-  for(i=1;i<=n;i++){
-      if(a[i].first-a[i-1].first>k){
-        break;
-      }
-      else{
-        k -= a[i].first-a[i-1].first;
-        k += a[i].second;
-      }
+  
+  int n,i;
+  cin>>n;
+  vector<vector<pair<int,int>>> adjList(n);
+  vi p(n,0);
+  REP(i,n-1){
+    int u,v,x;
+    cin>>u>>v>>x;
+    u--;
+    v--;
+    adjList[u].push_back({v,x});
+    adjList[v].push_back({u,x});
+    p[v] = u;
   }
-  cout<<a[i-1].first+k<<endl;
+  vector<LL> w(n,0);
+  i = 0;
+  REP(i,n) {
+    cin>>w[i];
+//    cout<<i<<" "<<w[i]<<endl;
+  }
+  
+  vector<LL> d1(n,INFF);
+  d1[0] = w[0];
+  vector<LL> d2(n,INFF);
+  d2[0] = 0;
+  queue<int> q;
+  q.push(0);
+  while(!q.empty()){
+    int u = q.front();
+  //  cout<<u<<endl;
+    q.pop();
+    for(auto e: adjList[u]){
+      int v = e.first;
+      int wg = e.second;
+      if(v!=p[u]){
+        d1[v] = d1[u]+wg;
+        d2[v] = d2[u]+2*wg;
+        int temp = d1[v];
+        d1[v] = min(d1[v], d2[v] + w[v]);
+        d2[v] = min(d2[v], temp + w[v]);
+       // d2[v] = min(d1[v]+w[v], d2[u]+ 2*wg);
+        q.push(v);
+      }
+    }
+  }
+  
+  //process query
+  int Q;
+  cin>>Q;
+  REP(i,Q){
+    int u,v;
+    cin>>u>>v;
+    cout<<d2[u-1]<<endl;
+  }
+  /*
+  REP(i,n){
+    cout<<i+1<<" "<<d1[i]<<" "<<d2[i]<<endl;
+  }
+  */
 	return 0;
 }

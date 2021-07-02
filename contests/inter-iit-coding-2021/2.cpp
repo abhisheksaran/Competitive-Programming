@@ -109,26 +109,29 @@ inline void OPEN(string s)
     freopen((s + ".out").c_str(), "w", stdout);
 #endif
 }
+LL m = 1e9 +7;
+LL f(int x){
+  LL z = sqrtl(x);
+  if(z<=1) return z;
+  else return (1+(z%m * (f(z)%m))%m)%m;
+
+}
 
 int main(){
-	ios_base::sync_with_stdio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  LL n,i,k;
+  int n,k,i;
   cin>>n>>k;
-  vector<pair<long long,long long>> a(n+1,{0,0});
-  REP(i,n) cin>>a[i+1].first>>a[i+1].second;
-
+  vi a(n);
+  REP(i,n) cin>>a[i];
   SORT(a);
-
-  for(i=1;i<=n;i++){
-      if(a[i].first-a[i-1].first>k){
-        break;
-      }
-      else{
-        k -= a[i].first-a[i-1].first;
-        k += a[i].second;
-      }
+  if(k>=n) cout<<k<<endl;
+  else {
+    LL ans = k;
+    for(i=0;i<n-k;i++){
+      ans = (ans%m + f(a[i])%m) %m;
+    }
+    cout<<ans<<endl;
   }
-  cout<<a[i-1].first+k<<endl;
 	return 0;
 }

@@ -109,26 +109,28 @@ inline void OPEN(string s)
     freopen((s + ".out").c_str(), "w", stdout);
 #endif
 }
+int fn(string s, int m){
+  int x = 0;
+  for(int i=m-1;i>=0;i--){
+    if(s[i]==')') x++;
+    else break;
+  }
+  return x;
+}
 
 int main(){
-	ios_base::sync_with_stdio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  LL n,i,k;
-  cin>>n>>k;
-  vector<pair<long long,long long>> a(n+1,{0,0});
-  REP(i,n) cin>>a[i+1].first>>a[i+1].second;
-
-  SORT(a);
-
-  for(i=1;i<=n;i++){
-      if(a[i].first-a[i-1].first>k){
-        break;
-      }
-      else{
-        k -= a[i].first-a[i-1].first;
-        k += a[i].second;
-      }
+  int t,i;
+  cin>>t;
+  REP(i,t){
+    int m;
+    cin>>m;
+    string s;
+    cin>>s;
+    int x = fn(s,m);
+    if(m-x < x) cout<<"Yes\n";
+    else cout<<"No\n";
   }
-  cout<<a[i-1].first+k<<endl;
 	return 0;
 }
